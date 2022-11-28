@@ -4,8 +4,21 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lab 9</title>
+    <script
+      src="http://ajaxref.com/ch2/errorreporter.js"
+      type="text/javascript"
+    ></script>
+    <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+    <script>
+      window.TrackJS &&
+        TrackJS.install({
+          token: "261951c24bb8465a9d171915d7423c00",
+          application: 'lab9',
+          // for more configuration options, see https://docs.trackjs.com
+        });
+    </script>
 
+    <title>Lab 9</title>
     <style>
       button {
         margin: 3px;
@@ -164,21 +177,10 @@
       function consoleTriggerGlobalError() {
         throw new Error("I am a global error");
       }
-
-      window.onerror = function (msg, url, lineNo, columnNo, error) {
-        console.log(
-          "Error: " +
-            msg +
-            " Script: " +
-            url +
-            " Line: " +
-            lineNo +
-            " Column: " +
-            columnNo +
-            " StackTrace: " +
-            error
-        );
-      };
+      if (window.onerror) {
+        TrackJS.track("Testing TrackJS!");
+        console.log("window.onerror caught an error");
+      }
     </script>
   </body>
 </html>
